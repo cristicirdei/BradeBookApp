@@ -1,0 +1,3 @@
+/*
+page to create a class
+*/

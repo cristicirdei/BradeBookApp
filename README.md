@@ -1,7 +1,9 @@
 # Some rules:
 1. Organize components in files
 2. Write responsive code
-3. Create separate stylesheet for different concerns
+3. Try to use rem as often as you can
+4. Create separate stylesheet for different concerns
+
 
 
 # Getting Started with Create React App

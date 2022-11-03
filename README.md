@@ -6,6 +6,7 @@
 5. Write responsive code
 6. Try to use rem as often as you can
 7. Create separate stylesheet for different concerns
+8. Use `Prettier` extension to format code
 
 
 

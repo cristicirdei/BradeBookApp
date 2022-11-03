@@ -11,6 +11,9 @@ const LandingPage = () => {
       <br></br>
       <br></br>
       <AddButton link="/add/class" page="Add Class"></AddButton>
+      <br></br>
+      <br></br>
+      <h1>Hello Style!</h1>
     </>
   );
 };

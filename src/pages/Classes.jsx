@@ -7,8 +7,8 @@ import React from "react";
 const Classes = () => {
   return (
     <>
-      <h1>Hello Style!</h1>
-      <p>Add a little style!.</p>
+      <h1>Classes</h1>
+      <p>Here are all classes</p>
     </>
   );
 };

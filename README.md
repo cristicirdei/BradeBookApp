@@ -1,10 +1,10 @@
 # Some rules:
 1. Create a new branch when working (!! do not edit on main)
 2. Create a `Pull Request` when you want to merge and ask for feedback before merging
-3. You can create a new bracnch for each endeavor 
+3. You can create a new branch for each endeavor 
 4. Organize components in files
 5. Write responsive code
-6. Try to use rem as often as you can
+6. Try to use `rem` as often as you can
 7. Create separate stylesheet for different concerns
 8. Use `Prettier` extension to format code
 

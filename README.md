@@ -1,3 +1,9 @@
+# Some rules:
+1. Organize components in files
+2. Write responsive code
+3. Create separate stylesheet for different concerns
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

@@ -1,3 +1,14 @@
+# Tasks
+1. Classes Page (includes Class Card Component)
+2. Students Page (includes Student Card Component)
+3. Tables (for grades and attendance) `Cristi`
+4. Class Details Page
+5. Reports Page
+6. Report Card Page (including tables and details)
+7. Create Class Page `Cristi`
+8. Add Student Page `Cristi`
+9. Add Teacher Page `Cristi`
+
 # Some rules:
 1. Create a new branch when working (!! do not edit on main)
 2. Create a `Pull Request` when you want to merge and ask for feedback before merging

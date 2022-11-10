@@ -4,6 +4,7 @@ import Students from "./pages/Students";
 import LandingPage from "./pages/LandingPage";
 import CreateClass from "./pages/CreateClass";
 import AddStudents from "./pages/AddStudents";
+import AddTeachers from "./pages/AddTeachers";
 import Class from "./pages/Class";
 import Attendance from "./pages/Attendance";
 import Grades from "./pages/Grades";
@@ -25,6 +26,7 @@ function App() {
             <Route path="/students" element={<Students />} />
             <Route path="/reports" element={<Reports />} />
             <Route path="/add/students" element={<AddStudents />} />
+            <Route path="/add/teachers" element={<AddTeachers />} />
             <Route path="/add/classes" element={<CreateClass />} />
             <Route path="/add/grades" element={<Grades />} />
             <Route path="/add/attendance" element={<Attendance />} />

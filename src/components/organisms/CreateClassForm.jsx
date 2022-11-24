@@ -83,7 +83,7 @@ const CreateClassForm = () => {
                         );
                       }}
                     ></input>
-                    <span className="geekmark"></span>
+                    <span className="geek-mark"></span>
                   </label>
                 </div>
               ))
@@ -107,11 +107,11 @@ const CreateClassForm = () => {
                         );
                       }}
                     ></input>
-                    <span className="geekmark-check"></span>
+                    <span className="geek-mark-check"></span>
                   </label>
                 </div>
               ))
-            : "No students enroled"}
+            : "No students enrolled"}
         </div>
       </div>
       <div className="footer-zone">

@@ -19,7 +19,7 @@ $shadowColor3: rgba(193, 193, 193, 0.6);
 
     /* Creating a custom checkbox
 based on demand */
-    .geekmark {
+    .geek-mark {
         position: absolute;
         top: 0;
         left: 0;
@@ -31,7 +31,7 @@ based on demand */
         border: 1px solid rgba(128, 128, 128, 0.168)
     }
 
-    .geekmark-check {
+    .geek-mark-check {
         position: absolute;
         top: 0;
         left: 0;
@@ -45,9 +45,9 @@ based on demand */
 
 
 
-    /* Checkmark to be shown in checkbox */
+    /* Check-mark to be shown in checkbox */
     /* It is not be shown when not checked */
-    .geekmark-check:after {
+    .geek-mark-check:after {
         content: "";
         position: absolute;
         display: block
@@ -55,11 +55,11 @@ based on demand */
 
 
 
-    /* Styling the checkmark using webkit */
+    /* Styling the check-mark using webkit */
     /* Rotated the rectangle by 45 degree and 
         showing only two border to make it look
-        like a tickmark */
-    .geekmark-check:after {
+        like a tick-mark */
+    .geek-mark-check:after {
         margin: 0;
         left: 4px;
         bottom: 4px;

@@ -6,7 +6,7 @@ const StudentCheckbox2 = ({ name }) => {
       <label htmlFor={name} className="main">
         {name}
         <input type="checkbox" id={name} value={name}></input>
-        <span className="geekmark"></span>
+        <span className="geek-mark"></span>
       </label>
     </div>
   );

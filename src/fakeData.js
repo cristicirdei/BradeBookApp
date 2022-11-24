@@ -57,4 +57,52 @@ const classGrades = {
   ],
 };
 
-export { fakeStudentsList, fakeTeachersList, fakeGradesList, classGrades };
+const classAttendance = {
+  name: "Math 1",
+  dates: ["22.11.22", "29.11.22"],
+  students: [
+    {
+      name: "Samantha Schinner",
+      att: [
+        { name: "22.11.22", value: "Absent" },
+        { name: "29.11.22", value: "Present" },
+      ],
+    },
+    {
+      name: "Antonia Kulas",
+      att: [
+        { name: "22.11.22", value: "Absent" },
+        { name: "29.11.22", value: "Absent" },
+      ],
+    },
+    {
+      name: "Lillie Lang",
+      att: [
+        { name: "22.11.22", value: "Present" },
+        { name: "29.11.22", value: "Present" },
+      ],
+    },
+    {
+      name: "Sue Parisian",
+      att: [
+        { name: "22.11.22", value: "Absent" },
+        { name: "29.11.22", value: "Motivated" },
+      ],
+    },
+    {
+      name: "Anthony Dickens",
+      att: [
+        { name: "22.11.22", value: "Present" },
+        { name: "29.11.22", value: "Present" },
+      ],
+    },
+  ],
+};
+
+export {
+  fakeStudentsList,
+  fakeTeachersList,
+  fakeGradesList,
+  classGrades,
+  classAttendance,
+};

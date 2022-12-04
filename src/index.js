@@ -9,6 +9,7 @@ import "../src/styles/Check.scss";
 import "../src/styles/Add.scss";
 import "../src/styles/CreateClass.scss";
 import "../src/styles/Tables.scss";
+import "../src/styles/Class.scss";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(<App />);

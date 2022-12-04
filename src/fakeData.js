@@ -4,6 +4,8 @@ const fakeStudentsList = Array.apply(null, Array(15)).map(function (i) {
   return faker.name.fullName();
 });
 
+console.log(fakeStudentsList);
+
 const fakeTeachersList = Array.apply(null, Array(5)).map(function (i) {
   return faker.name.fullName();
 });

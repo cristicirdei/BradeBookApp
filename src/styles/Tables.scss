@@ -12,6 +12,7 @@ $shadowColor3: rgba(193, 193, 193, 0.6);
 table {
     @include bordered;
     border-spacing: 0;
+    margin: 0;
 
     td,
     th {
@@ -74,7 +75,8 @@ table {
         "footer nada";
     column-gap: 1rem;
     row-gap: 1rem;
-    margin: auto;
+    margin: 0;
+    padding: 0;
     align-self: center;
 
     .footer-zone {
@@ -124,9 +126,13 @@ table {
     margin: auto;
     align-self: center;
 
-    th {
+    .th {
         text-orientation: mixed;
         writing-mode: vertical-rl;
+    }
+
+    th {
+        font-size: 1rem;
     }
 
     td {
@@ -178,7 +184,8 @@ table {
         padding: 1rem;
         margin: 0;
 
-        input {
+        input,
+        input[type=date] {
             border: none;
             border-radius: 5px;
             box-shadow: 0px 1px 5px 1px $shadowColor2;

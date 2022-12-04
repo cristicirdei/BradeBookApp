@@ -1,9 +1,17 @@
 $themeColor: #FF8402;
-$shadowColor: rgba(255, 232, 207, 0.2);
-$shadowColor2: rgba(255, 232, 207, 0.4);
+$shadowColor: rgba(193, 193, 193, 0.2);
+$shadowColor2: rgba(193, 193, 193, 0.4);
 $shadowColor3: rgba(193, 193, 193, 0.6);
 
-@mixin shadow {}
+.page {
+    padding: 1rem 2rem;
+    display: flex;
+    flex-direction: column;
+
+    p {
+        margin: 0.5rem 0;
+    }
+}
 
 .menuButtonContainer {
     padding: 0.5rem 1rem;
@@ -17,8 +25,8 @@ $shadowColor3: rgba(193, 193, 193, 0.6);
     border-radius: 10px;
     padding: 0.4rem 1rem;
     width: 10rem;
-    box-shadow: 0px 2px 15px 2px $shadowColor;
-    margin: 0.3rem;
+    box-shadow: 0px 2px 10px 2px $shadowColor;
+    margin: 0.2rem;
     font-size: 1rem;
 }
 
@@ -35,6 +43,26 @@ $shadowColor3: rgba(193, 193, 193, 0.6);
     width: 170px;
     padding: 0.5rem;
     box-shadow: 0px 2px 10px 2px $shadowColor;
+
+    span {
+        margin-right: 0.5rem;
+        color: $themeColor;
+        font-size: 1rem;
+    }
+}
+
+.addButton-simple {
+    background-color: white;
+    color: #000000;
+    border: 2px solid white;
+    border-radius: 10px;
+    margin: 0.5rem 0;
+
+    span {
+        margin-right: 0.5rem;
+        color: $themeColor;
+        font-size: 1rem;
+    }
 }
 
 .addButton:hover {
@@ -43,13 +71,19 @@ $shadowColor3: rgba(193, 193, 193, 0.6);
     box-shadow: 0px 1px 10px 1px $shadowColor2;
 }
 
+.addButton-simple:hover {
+    border: 2px solid white;
+    border-radius: 3px;
+    box-shadow: 0px 1px 5px 1px $shadowColor2;
+}
+
 .menu {
     padding: 7rem 5rem;
     display: flex;
     align-items: center;
     flex-direction: column;
-    box-shadow: 0px 1px 10px 1px $shadowColor3;
-    height: 100vh;
+    box-shadow: 0px 1px 5px 1px $shadowColor2;
+    height: 120vh;
 }
 
 .header {
@@ -60,6 +94,10 @@ $shadowColor3: rgba(193, 193, 193, 0.6);
 .dash-title {
     font-size: 1.1rem;
     margin: 1rem 0 2rem 0;
+}
+
+h1 {
+    font-size: 2rem;
 }
 
 @media screen and (max-width: 768px) {

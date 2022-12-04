@@ -9,15 +9,14 @@ $shadowColor3: rgba(193, 193, 193, 0.6);
     border: 1px solid rgba(128, 128, 128, 0.168)
 }
 
-.class-details {
+.create-form {
     padding: 3rem 5rem;
     display: grid;
     grid-template-columns: 35vW 20vw;
-    grid-template-rows: auto auto auto;
+    grid-template-rows: auto;
     grid-template-areas:
         "details students"
-        "details students"
-        "details students";
+        "footer footer";
     column-gap: 1rem;
     row-gap: 1rem;
     margin: auto;
@@ -29,15 +28,8 @@ $shadowColor3: rgba(193, 193, 193, 0.6);
         border: 1px solid rgba(128, 128, 128, 0.168)
     }
 
-    .container {
-        grid-area: details;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 0;
-    }
-
     div {
+        grid-area: details;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -46,21 +38,7 @@ $shadowColor3: rgba(193, 193, 193, 0.6);
 
     .details-zone {
         @include bordered;
-        height: fit-content;
-        margin-bottom: 0.5rem;
-        width: 100%;
-    }
-
-    .tables-zone {
-        @include bordered;
-        padding: 1rem;
-        margin-bottom: 0.5rem;
-        width: 100%;
-    }
-
-    .table-det {
-        width: 100%;
-        margin: 0;
+        grid-area: details;
     }
 
     .students-zone {
@@ -68,8 +46,36 @@ $shadowColor3: rgba(193, 193, 193, 0.6);
         grid-area: students;
         height: max-content;
 
+        .search-student {
+            width: 100%;
+            box-shadow: 0px 1px 5px 1px $shadowColor2;
+            margin-bottom: 0;
 
+        }
+
+        .list {
+            margin-top: 0.5rem;
+            width: 100%;
+            padding: 0.2rem;
+        }
+
+        .search-zone {
+            @include bordered;
+            margin: 0;
+            width: 100%;
+            padding: 0.2rem;
+            border-radius: 2px 2px 5px 5px;
+        }
     }
+
+    .footer-zone {
+        @include bordered;
+        grid-area: footer;
+        align-items: flex-end;
+        padding: 1rem;
+        margin: 0;
+    }
+
 
     .input-group {
         display: flex;

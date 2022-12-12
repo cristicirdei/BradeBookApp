@@ -101,10 +101,51 @@ const classAttendance = {
   ],
 };
 
+const student = {
+  name: "Mark",
+  age: 17,
+  classes: ["Math 7B", "English 7B"],
+  grades: [
+    {
+      name: "Math 7B",
+      values: [
+        { name: "Test 1", value: 7 },
+        { name: "Test 2", value: 4 },
+      ],
+    },
+    {
+      name: "English 7B",
+      values: [
+        { name: "Test 1", value: 10 },
+        { name: "Homework 1", value: 9 },
+        { name: "Homework 2", value: 7 },
+      ],
+    },
+  ],
+  attendance: [
+    {
+      name: "Math 7B",
+      values: [
+        { name: "21.11.22", value: "Absent" },
+        { name: "28.11.22", value: "Motivated" },
+        { name: "5.12.22", value: "Present" },
+      ],
+    },
+    {
+      name: "English 7B",
+      values: [
+        { name: "22.11.22", value: "Present" },
+        { name: "29.11.22", value: "Present" },
+      ],
+    },
+  ],
+};
+
 export {
   fakeStudentsList,
   fakeTeachersList,
   fakeGradesList,
   classGrades,
   classAttendance,
+  student,
 };

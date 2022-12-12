@@ -8,16 +8,14 @@ fontawesome.library.add(faSquarePlus);
 
 const AddButton = ({ link, page }) => {
   return (
-    <>
-      <Link to={link}>
-        <button className="addButton">
-          <span>
-            <FontAwesomeIcon icon="square-plus" />
-          </span>
-          {page}
-        </button>
-      </Link>
-    </>
+    <Link to={link}>
+      <button className="addButton">
+        <span>
+          <FontAwesomeIcon icon="square-plus" />
+        </span>
+        {page}
+      </button>
+    </Link>
   );
 };
 export default AddButton;

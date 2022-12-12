@@ -6,7 +6,7 @@ import { classAttendance } from "../../fakeData";
 
 fontawesome.library.add(faSquarePlus);
 
-const Table = () => {
+const AttendanceTable = () => {
   const [changes, setChanges] = useState([]);
   const [newAttendance, setNewAttendance] = useState([]);
 
@@ -196,4 +196,4 @@ const Table = () => {
   );
 };
 
-export default Table;
+export default AttendanceTable;

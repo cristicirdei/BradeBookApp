@@ -5,25 +5,25 @@ page with all students
 import React from "react";
 import StudentCard from "../components/molecules/StudentCard";
 import AddButton from "../components/atoms/AddButton";
-import { fakeStudentsList } from "../fakeData";
+import { fakeTeachersList } from "../fakeData";
 
-const Students = () => {
+const Teachers = () => {
   return (
     <div className="page">
-      <h1>Students</h1>
-      <p>Here are all the kids</p>
+      <h1>Teachers</h1>
+      <p>Here are all the teachers</p>
 
       <div className="classes-container">
-        {fakeStudentsList.map((student, index) => (
+        {fakeTeachersList.map((teacher, index) => (
           <StudentCard
             key={index}
-            link={"/view/student"}
-            name={student}
+            link={"/view/teacher"}
+            name={teacher}
           ></StudentCard>
         ))}
-        <AddButton link="/add/students" page="Add Student"></AddButton>
+        <AddButton link="/add/teachers" page="Add Teacher"></AddButton>
       </div>
     </div>
   );
 };
-export default Students;
+export default Teachers;

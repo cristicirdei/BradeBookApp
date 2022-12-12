@@ -35,6 +35,13 @@ $shadowColor3: rgba(193, 193, 193, 0.6);
         flex-direction: column;
         align-items: center;
         padding: 0;
+
+        h2:not(:first-child) {
+            float: left;
+            color: $themeColor;
+            margin: 2rem 0 0.5rem 0;
+            padding: 0;
+        }
     }
 
     div {
@@ -49,25 +56,31 @@ $shadowColor3: rgba(193, 193, 193, 0.6);
         height: fit-content;
         margin-bottom: 0.5rem;
         width: 100%;
+        display: flex;
+        align-items: flex-start;
+
+        h2 {
+            margin-bottom: 1rem;
+        }
+
+        p {
+            padding: 0;
+            margin: 0.1rem;
+        }
     }
 
-    .tables-zone {
-        @include bordered;
-        padding: 1rem;
-        margin-bottom: 0.5rem;
-        width: 100%;
-    }
 
-    .table-det {
-        width: 100%;
-        margin: 0;
-    }
 
     .students-zone {
         @include bordered;
         grid-area: students;
         height: max-content;
+        display: flex;
+        align-items: flex-start;
 
+        h2 {
+            margin-bottom: 1rem;
+        }
 
     }
 
@@ -91,8 +104,7 @@ $shadowColor3: rgba(193, 193, 193, 0.6);
         width: 100%;
     }
 
-    input,
-    select {
+    input {
         border: none;
         border-radius: 5px;
         box-shadow: 0px 1px 5px 1px $shadowColor2;
@@ -101,19 +113,10 @@ $shadowColor3: rgba(193, 193, 193, 0.6);
         margin: 0.2rem 0 1rem 0;
     }
 
-    input[type="submit"] {
-        width: max-content;
-        padding-left: 2rem;
-        padding-right: 2rem;
-        margin: 0;
-        background-color: $themeColor;
-        color: white;
-    }
-
     input[type="checkbox"] {
         width: max-content;
         margin: 0;
-        background-color: $themeColor;
+        //background-color: $themeColor;
         color: white;
         align-self: center;
     }
@@ -121,23 +124,13 @@ $shadowColor3: rgba(193, 193, 193, 0.6);
     input[type="checkbox"]:checked:before {
         width: max-content;
         margin: 0;
-        background-color: $themeColor;
+        //background-color: $themeColor;
         color: white;
-    }
-
-    textarea {
-        border: none;
-        border-radius: 5px;
-        box-shadow: 0px 1px 5px 1px $shadowColor2;
-        width: 20rem;
-        height: 7rem;
-        padding: 0.5rem;
-        margin: 0.2rem 0 1rem 0;
-        resize: none;
     }
 
     label {
         margin: 0.2rem 0;
+        padding-left: 0;
     }
 
     h2 {
@@ -145,11 +138,73 @@ $shadowColor3: rgba(193, 193, 193, 0.6);
         color: $themeColor;
     }
 
+    h3 {
+        margin-bottom: 0.5rem;
+        margin-top: 1rem;
+        color: $themeColor;
+    }
+
+    .list {
+        padding: 0 1rem 1rem 0;
+        margin: 0;
+        width: 100%;
+    }
 
 }
 
+.centered {
+    padding: 0 1rem;
+}
+
+.classes-section {
+    height: 2rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.168);
+}
+
+.classes-container {
+    display: flex;
+    flex-flow: row;
+    flex-wrap: wrap;
+    align-items: center
+}
+
+.class-card {
+    @include bordered;
+    width: 17rem;
+    height: 9rem;
+    padding: 1rem 1rem 0.5rem 1rem;
+    text-decoration: none;
+    margin: 0.5rem 1rem 0.5rem 0;
+
+    h2 {
+        margin-bottom: 0.5rem;
+    }
+
+    p {
+        font-size: small;
+        float: right;
+        margin-top: 2.5rem;
+        padding: 0;
+    }
+
+    .eye {
+        height: 1rem;
+        font-size: small;
+        float: right;
+        margin-top: 2.7rem;
+        padding: 0;
+    }
+}
+
+.class-card:hover {
+    box-shadow: 0px 1px 10px 1px $shadowColor2;
+}
+
+
+
 @media screen and (max-width: 768px) {
-    .create-form {
+    .class-details {
         width: 80vw;
         display: flex;
         flex-direction: column;
@@ -159,11 +214,5 @@ $shadowColor3: rgba(193, 193, 193, 0.6);
 
     .details-zone {
         padding: 0.5rem;
-
-        input,
-        textarea,
-        select {
-            width: 65vw;
-        }
     }
 }

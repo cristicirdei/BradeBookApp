@@ -51,6 +51,7 @@
 
 .col-12 {
     width: 100%;
+    position: absolute;
 }
 
 @media only screen and (max-width: 768px) {
@@ -69,5 +70,4 @@
 
 [class*="col-"] {
     float: left;
-    padding: 25px;
 }

@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Classes from "./pages/Classes";
 import Students from "./pages/Students";
+import Teachers from "./pages/Teachers";
 import LandingPage from "./pages/LandingPage";
 import CreateClass from "./pages/CreateClass";
 import AddStudents from "./pages/AddStudents";
@@ -12,6 +13,9 @@ import StudentReport from "./pages/StudentReport";
 import Menu from "./components/molecules/Menu";
 import Reports from "./pages/Reports";
 import Header from "./components/molecules/Header";
+import Login from "./pages/Login";
+import Join from "./pages/Join";
+import Teacher from "./pages/Teacher";
 
 function App() {
   return (
@@ -22,8 +26,10 @@ function App() {
         <div className="col-10">
           <Routes>
             <Route path="/" element={<LandingPage />} />
+
             <Route path="/classes" element={<Classes />} />
             <Route path="/students" element={<Students />} />
+            <Route path="/teachers" element={<Teachers />} />
             <Route path="/reports" element={<Reports />} />
             <Route path="/add/students" element={<AddStudents />} />
             <Route path="/add/teachers" element={<AddTeachers />} />
@@ -32,6 +38,15 @@ function App() {
             <Route path="/add/attendance" element={<Attendance />} />
             <Route path="/view/class" element={<Class />} />
             <Route path="/view/student" element={<StudentReport />} />
+            <Route path="/view/teacher" element={<Teacher />} />
+          </Routes>
+        </div>
+      </BrowserRouter>
+      <BrowserRouter>
+        <div className="col-12">
+          <Routes>
+            <Route path="/auth" element={<Login />} />
+            <Route path="/auth/join" element={<Join />} />
           </Routes>
         </div>
       </BrowserRouter>

@@ -3,10 +3,32 @@ $shadowColor: rgba(193, 193, 193, 0.2);
 $shadowColor2: rgba(193, 193, 193, 0.4);
 $shadowColor3: rgba(193, 193, 193, 0.6);
 
+@mixin bordered {
+    box-shadow: 0px 2px 10px 2px $shadowColor;
+    border-radius: 10px;
+    border: 1px solid rgba(128, 128, 128, 0.168)
+}
+
 .page {
     padding: 1rem 2rem;
     display: flex;
     flex-direction: column;
+    box-shadow: 0px 1px 5px 1px $shadowColor2;
+    min-height: 100vh;
+
+    p {
+        margin: 0.5rem 0;
+    }
+}
+
+.page-over {
+    padding: 1rem 2rem;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    margin: 0;
+    height: 100vh;
+    box-shadow: 0px 1px 5px 1px $shadowColor2;
 
     p {
         margin: 0.5rem 0;
@@ -40,9 +62,9 @@ $shadowColor3: rgba(193, 193, 193, 0.6);
     color: #000000;
     border: 2px solid white;
     border-radius: 10px;
-    width: 170px;
+    width: 140px;
     padding: 0.5rem;
-    box-shadow: 0px 2px 10px 2px $shadowColor;
+    //box-shadow: 0px 2px 10px 2px $shadowColor;
 
     span {
         margin-right: 0.5rem;
@@ -77,13 +99,22 @@ $shadowColor3: rgba(193, 193, 193, 0.6);
     box-shadow: 0px 1px 5px 1px $shadowColor2;
 }
 
+.class-link {
+    background-color: white;
+    color: $themeColor;
+    border: none;
+    margin: 0.2rem;
+    font-size: 1rem;
+}
+
 .menu {
-    padding: 7rem 5rem;
+    padding: 2rem 1rem;
     display: flex;
     align-items: center;
     flex-direction: column;
-    box-shadow: 0px 1px 5px 1px $shadowColor2;
-    height: 120vh;
+
+    height: 100%;
+    overflow: auto;
 }
 
 .header {
@@ -99,6 +130,8 @@ $shadowColor3: rgba(193, 193, 193, 0.6);
 h1 {
     font-size: 2rem;
 }
+
+
 
 @media screen and (max-width: 768px) {
     .menu {

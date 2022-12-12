@@ -6,7 +6,7 @@ import { faSquarePlus } from "@fortawesome/free-solid-svg-icons";
 
 fontawesome.library.add(faSquarePlus);
 
-const Table = () => {
+const GradesTable = () => {
   const [changes, setChanges] = useState([]);
   const [newGrades, setNewGrades] = useState([]);
 
@@ -176,4 +176,4 @@ const Table = () => {
   );
 };
 
-export default Table;
+export default GradesTable;

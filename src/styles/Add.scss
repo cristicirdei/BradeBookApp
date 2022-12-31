@@ -33,6 +33,12 @@ $shadowColor3: rgba(193, 193, 193, 0.6);
     .details-zone {
         @include bordered;
         grid-area: details;
+
+        p {
+
+            font-size: smaller;
+            color: gray;
+        }
     }
 
     .footer-zone {
@@ -121,6 +127,22 @@ $shadowColor3: rgba(193, 193, 193, 0.6);
         textarea,
         select {
             width: 65vw;
+        }
+
+        p {
+            padding: 0rem 0rem;
+            margin: 0;
+        }
+
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .add-form {
+        .details-zone {
+            p {
+                padding: 0 4rem;
+            }
         }
     }
 }

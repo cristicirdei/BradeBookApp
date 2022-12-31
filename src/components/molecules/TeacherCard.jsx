@@ -4,9 +4,9 @@ a card element to represent a student
 
 import React from "react";
 import { Link } from "react-router-dom";
-import icon from "../../resources/user-graduate-solid.svg";
+import icon from "../../resources/teacher-user-solid.svg";
 
-const StudentCard = ({ link, name }) => {
+const TeacherCard = ({ link, name }) => {
   return (
     <Link to={link} style={{ color: "inherit", textDecoration: "none" }}>
       <div className="student-card">
@@ -16,4 +16,4 @@ const StudentCard = ({ link, name }) => {
     </Link>
   );
 };
-export default StudentCard;
+export default TeacherCard;

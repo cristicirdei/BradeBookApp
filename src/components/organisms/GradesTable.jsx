@@ -1,19 +1,18 @@
 import React, { useState } from "react";
-import { classGrades } from "../../fakeData";
 import fontawesome from "@fortawesome/fontawesome";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSquarePlus } from "@fortawesome/free-solid-svg-icons";
 
 fontawesome.library.add(faSquarePlus);
 
-const GradesTable = () => {
+const GradesTable = ({ grades }) => {
   const [changes, setChanges] = useState([]);
   const [newGrades, setNewGrades] = useState([]);
 
   const [addNew, setAddNew] = useState(false);
   const [newGrade, setNewGrade] = useState();
 
-  const class1 = classGrades;
+  const class1 = grades;
 
   const onClick = () => {
     /*console.log("new grades", newGrades);*/

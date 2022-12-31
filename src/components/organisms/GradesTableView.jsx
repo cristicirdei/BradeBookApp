@@ -1,14 +1,13 @@
 import React from "react";
-import { classGrades } from "../../fakeData";
 
-const GradesTableView = () => {
-  const class1 = classGrades;
+const GradesTableView = ({ grades }) => {
+  const class1 = grades;
 
   return (
     <table className="view-table">
       <thead>
         <tr>
-          <th colSpan={3} className="table-title">
+          <th colSpan={class1.grades.length + 1} className="table-title">
             Grades
           </th>
         </tr>

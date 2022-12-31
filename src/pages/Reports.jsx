@@ -1,8 +1,41 @@
-import React from "react";
-import { fakeStudentsList } from "../fakeData";
+import React, { useState, useEffect } from "react";
+import { BACKEND_URL } from "../utils/constants";
+import { user } from "../data/userData";
 
 const Reports = () => {
-  const classes = ["Math 7B", "English 7B", "Geometry 12C"];
+  const [classesList, setClassesList] = useState();
+  const [studentsList, setStudentsList] = useState();
+
+  useEffect(() => {
+    const fetchClassData = async () => {
+      try {
+        const response = await fetch(
+          `${BACKEND_URL}/classes/all/${user.institution}`
+        );
+        const json = await response.json();
+        console.log(json);
+        setClassesList(json);
+      } catch (error) {
+        console.log("error", error);
+      }
+    };
+
+    const fetchStudentData = async () => {
+      try {
+        const response = await fetch(
+          `${BACKEND_URL}/students/all/${user.institution}`
+        );
+        const json = await response.json();
+        console.log(json);
+        setStudentsList(json);
+      } catch (error) {
+        console.log("error", error);
+      }
+    };
+
+    fetchClassData();
+    fetchStudentData();
+  }, []);
 
   return (
     <div className="page">
@@ -11,11 +44,13 @@ const Reports = () => {
         <h3>Class Report</h3>
         <div className="input-group">
           <select id="class">
-            {classes.map((option, index) => (
-              <option key={index} value={option}>
-                {option}
-              </option>
-            ))}
+            {classesList && classesList.payload.length > 0
+              ? classesList.payload.map((option, index) => (
+                  <option key={index} value={option.name}>
+                    {option.name}
+                  </option>
+                ))
+              : ""}
           </select>
           <button className="menuButton">Generate Class Report</button>
         </div>
@@ -24,11 +59,13 @@ const Reports = () => {
         <h3>Student Report</h3>
         <div className="input-group">
           <select id="class">
-            {fakeStudentsList.map((option, index) => (
-              <option key={index} value={option}>
-                {option}
-              </option>
-            ))}
+            {studentsList && studentsList.payload.length > 0
+              ? studentsList.payload.map((option, index) => (
+                  <option key={index} value={option.name}>
+                    {option.name}
+                  </option>
+                ))
+              : ""}
           </select>
           <button className="menuButton">Generate Student Report</button>
         </div>

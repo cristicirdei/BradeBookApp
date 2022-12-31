@@ -12,16 +12,21 @@ $shadowColor3: rgba(193, 193, 193, 0.6);
 .student-card {
     @include bordered;
     width: 17rem;
-    height: 3.5rem;
+    height: 3rem;
     padding: 0.5rem;
     text-decoration: none;
     margin: 0.5rem 1rem 0.5rem 0;
     display: flex;
-    flex-flow: column;
-    justify-items: space-between;
+    flex-flow: row;
+    justify-items: center;
+
+    img {
+        height: 1.5rem;
+        margin: 0.1rem 1rem 0.1rem 0.5rem;
+    }
 
     h3 {
-        margin: 0.2rem;
+        margin-top: 0.2rem;
         padding: 0;
         width: fit-content;
     }

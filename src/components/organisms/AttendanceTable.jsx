@@ -2,16 +2,17 @@ import React, { useState } from "react";
 import fontawesome from "@fortawesome/fontawesome";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSquarePlus } from "@fortawesome/free-solid-svg-icons";
-import { classAttendance } from "../../fakeData";
 
 fontawesome.library.add(faSquarePlus);
 
-const AttendanceTable = () => {
+const AttendanceTable = ({ att }) => {
   const [changes, setChanges] = useState([]);
   const [newAttendance, setNewAttendance] = useState([]);
 
   const [addNew, setAddNew] = useState(false);
   const [newDate, setNewDate] = useState();
+
+  const classAttendance = att;
 
   const onClick = () => {
     if (newAttendance.length) {

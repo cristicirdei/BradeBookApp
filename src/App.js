@@ -17,6 +17,8 @@ import Login from "./pages/Login";
 import Join from "./pages/Join";
 import Teacher from "./pages/Teacher";
 
+import { user } from "./data/userData";
+
 function App() {
   return (
     <>
@@ -24,22 +26,32 @@ function App() {
         <Header />
         <Menu />
         <div className="col-10">
-          <Routes>
-            <Route path="/" element={<LandingPage />} />
+          {user.type === "admin" && (
+            <Routes>
+              <Route path="/" element={<LandingPage />} />
+              <Route path="/classes" element={<Classes />} />
+              <Route path="/students" element={<Students />} />
+              <Route path="/teachers" element={<Teachers />} />
+              <Route path="/add/students" element={<AddStudents />} />
+              <Route path="/add/teachers" element={<AddTeachers />} />
+              <Route path="/add/classes" element={<CreateClass />} />
+              <Route path="/view/class/:id" element={<Class />} />
+              <Route path="/view/student/:id" element={<StudentReport />} />
+              <Route path="/view/teacher/:id" element={<Teacher />} />
+              <Route path="/reports" element={<Reports />} />
+            </Routes>
+          )}
 
-            <Route path="/classes" element={<Classes />} />
-            <Route path="/students" element={<Students />} />
-            <Route path="/teachers" element={<Teachers />} />
-            <Route path="/reports" element={<Reports />} />
-            <Route path="/add/students" element={<AddStudents />} />
-            <Route path="/add/teachers" element={<AddTeachers />} />
-            <Route path="/add/classes" element={<CreateClass />} />
-            <Route path="/add/grades" element={<Grades />} />
-            <Route path="/add/attendance" element={<Attendance />} />
-            <Route path="/view/class" element={<Class />} />
-            <Route path="/view/student" element={<StudentReport />} />
-            <Route path="/view/teacher" element={<Teacher />} />
-          </Routes>
+          {user.type === "teacher" && (
+            <Routes>
+              <Route path="/" element={<LandingPage />} />
+              <Route path="/classes" element={<Classes />} />
+              <Route path="/add/grades" element={<Grades />} />
+              <Route path="/add/attendance" element={<Attendance />} />
+              <Route path="/view/class/:id" element={<Class />} />
+              <Route path="/view/student/:id" element={<StudentReport />} />
+            </Routes>
+          )}
         </div>
       </BrowserRouter>
       <BrowserRouter>

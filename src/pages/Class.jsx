@@ -2,34 +2,78 @@
 page detailing a class
 */
 
-import React from "react";
-import { fakeStudentsList } from "../fakeData";
+import React, { useEffect, useState } from "react";
 import GradesTableView from "../components/organisms/GradesTableView";
 import AttendanceTableView from "../components/organisms/AttendanceTableView";
+import { useParams } from "react-router-dom";
+import { BACKEND_URL } from "../utils/constants";
 
 const Class = () => {
-  const checkedStudentsList = fakeStudentsList;
+  let { id } = useParams();
+
+  const [class1, setClass1] = useState("");
+  const [att, setAtt] = useState();
+  const [grades, setGrades] = useState();
+
+  useEffect(() => {
+    const fetchClassData = async () => {
+      try {
+        const response = await fetch(`${BACKEND_URL}/classes/${id}`);
+        const json = await response.json();
+        console.log(json);
+        setClass1(json);
+      } catch (error) {
+        console.log("error", error);
+      }
+    };
+
+    const fetchGradesData = async () => {
+      try {
+        const response = await fetch(`${BACKEND_URL}/grades/class/${id}`);
+        const json = await response.json();
+        console.log(json);
+        setGrades(json);
+      } catch (error) {
+        console.log("error", error);
+      }
+    };
+
+    const fetchAttData = async () => {
+      try {
+        const response = await fetch(`${BACKEND_URL}/attendance/class/${id}`);
+        const json = await response.json();
+        console.log(json);
+        setAtt(json);
+      } catch (error) {
+        console.log("error", error);
+      }
+    };
+
+    fetchClassData();
+    fetchGradesData();
+    fetchAttData();
+  }, [id]);
 
   return (
     <div className="page">
       <div className="class-details">
         <div className="container">
           <div className="details-zone">
-            <h2>Math 7B</h2>
-            <p>Subject: Math</p>
-            <p>Teacher: Mr. Something</p>
-            <p>About: 7th grade algebra</p>
+            <h2>{class1.name}</h2>
+            <p>Subject: {class1.subject}</p>
+            <p>Teacher: {class1.teacher}</p>
+            <p>About: {class1.description}</p>
           </div>
-          <GradesTableView></GradesTableView>
-          <AttendanceTableView></AttendanceTableView>
+          {grades ? <GradesTableView grades={grades}></GradesTableView> : ""}
+          {att ? <AttendanceTableView att={att}></AttendanceTableView> : ""}
         </div>
 
         <div className="students-zone">
           <h2>Students</h2>
 
           <div className="list">
-            {checkedStudentsList.length
-              ? checkedStudentsList.map((name, index) => (
+            {class1.students && class1.students.length > 0
+              ? class1.students.map((name, index) => (
                   <div className="input-group-student" key={index}>
                     <label htmlFor={name} className="main">
                       {name}

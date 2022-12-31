@@ -1,12 +1,12 @@
 import React from "react";
-import { classAttendance } from "../../fakeData";
 
-const AttendanceTableView = () => {
+const AttendanceTableView = ({ att }) => {
+  const classAttendance = att;
   return (
     <table className="view-table">
       <thead>
         <tr>
-          <th colSpan={3} className="table-title">
+          <th colSpan={classAttendance.dates.length + 1} className="table-title">
             Attendance
           </th>
         </tr>

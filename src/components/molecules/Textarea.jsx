@@ -1,10 +1,14 @@
 import React from "react";
 
-const Textarea = ({ name, placeholder }) => {
+const Textarea = ({ name, placeholder, onChange }) => {
   return (
     <div className="input-group">
       <label htmlFor={name}>{name}</label>
-      <textarea id={name} placeholder={placeholder}></textarea>
+      <textarea
+        id={name}
+        placeholder={placeholder}
+        onChange={onChange}
+      ></textarea>
     </div>
   );
 };

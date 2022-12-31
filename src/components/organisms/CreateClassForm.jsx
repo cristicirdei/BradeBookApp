@@ -2,18 +2,101 @@
 form for creating a new class
 */
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Input from "../molecules/Input";
 import Select from "../molecules/Select";
 import Textarea from "../molecules/Textarea";
-import { fakeStudentsList, fakeTeachersList } from "../../fakeData";
+import { user } from "../../data/userData";
+import { BACKEND_URL } from "../../utils/constants";
+import axios from "axios";
 
 const CreateClassForm = () => {
-  const list = fakeStudentsList;
-  const tList = fakeTeachersList;
+  let navigate = useNavigate();
 
   const [checkedStudentsList, setCheckedStudentsList] = useState([]);
   const [searchStudentsList, setSearchStudentsList] = useState([]);
+
+  const [students, setStudents] = useState();
+  const [teachers, setTeachers] = useState();
+
+  const [data, setData] = useState({
+    name: "",
+    subject: "",
+    nr: "",
+    teacher: null,
+    description: "",
+    students: [],
+  });
+
+  const getCodded = (list) => {
+    const data = Array.from(
+      checkedStudentsList,
+      (s) => students.payload.find((x) => x.name === s).id
+    );
+    return data;
+  };
+
+  const addSt = () => {
+    setData((prevState) => ({
+      ...prevState,
+      students: getCodded(checkedStudentsList),
+    }));
+  };
+
+  const request = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await axios.post(
+        `${BACKEND_URL}/classes/${user.institution}`,
+        {
+          name: data.name,
+          subject: data.subject,
+          nr: data.nr,
+          teacher: data.teacher,
+          description: data.description,
+          students: data.students,
+        }
+      );
+      console.log(res.data);
+    } catch (e) {
+      alert(e);
+    }
+    navigate("/classes");
+  };
+
+  useEffect(() => {
+    const fetchStudentsData = async () => {
+      try {
+        const response = await fetch(
+          `${BACKEND_URL}/students/all/${user.institution}`
+        );
+        const json = await response.json();
+        console.log(json);
+        setStudents(json);
+      } catch (error) {
+        console.log("error", error);
+      }
+    };
+
+    const fetchTeachersData = async () => {
+      try {
+        const response = await fetch(
+          `${BACKEND_URL}/teachers/all/${user.institution}`
+        );
+        const json = await response.json();
+        console.log(json);
+        setTeachers(json);
+      } catch (error) {
+        console.log("error", error);
+      }
+    };
+    fetchStudentsData();
+    fetchTeachersData();
+  }, []);
+
+  const list = students ? students.payload.map((s) => s.name) : [];
+  const tList = teachers ? teachers.payload : [];
 
   const search = (term) =>
     setSearchStudentsList(
@@ -25,7 +108,7 @@ const CreateClassForm = () => {
     );
 
   return (
-    <form className="create-form">
+    <form className="create-form" onSubmit={request}>
       <div className="details-zone">
         <h2>Class Details</h2>
 
@@ -33,25 +116,63 @@ const CreateClassForm = () => {
           type="text"
           name="Name"
           placeholder="Enter a name for the class"
+          onChange={(e) =>
+            setData((prevState) => ({
+              ...prevState,
+              name: e.target.value,
+            }))
+          }
         ></Input>
 
         <Input
           type="text"
           name="Subject"
           placeholder="Enter the subject of the class"
+          onChange={(e) =>
+            setData((prevState) => ({
+              ...prevState,
+              subject: e.target.value,
+            }))
+          }
         ></Input>
 
         <Input
           type="text"
           name="ID"
           placeholder="Enter the ID of the class"
+          onChange={(e) =>
+            setData((prevState) => ({
+              ...prevState,
+              nr: e.target.value,
+            }))
+          }
         ></Input>
 
-        <Select name="Teacher" placeholder="Teacher" options={tList}></Select>
+        {teachers ? (
+          <Select
+            name="Teacher"
+            placeholder="Teacher"
+            options={tList}
+            onChange={(e) =>
+              setData((prevState) => ({
+                ...prevState,
+                teacher: tList.find((t) => t.name === e.target.value).id,
+              }))
+            }
+          ></Select>
+        ) : (
+          ""
+        )}
 
         <Textarea
           name="Description"
           placeholder="Enter a description of the class"
+          onChange={(e) =>
+            setData((prevState) => ({
+              ...prevState,
+              description: e.target.value,
+            }))
+          }
         ></Textarea>
       </div>
       <div className="students-zone">
@@ -114,7 +235,7 @@ const CreateClassForm = () => {
             : "No students enrolled"}
         </div>
       </div>
-      <div className="footer-zone">
+      <div className="footer-zone" onClick={addSt}>
         <input type="submit" value="Create Class"></input>
       </div>
     </form>

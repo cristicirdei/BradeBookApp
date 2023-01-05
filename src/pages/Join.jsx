@@ -1,27 +1,35 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Input from "../components/molecules/Input";
-import { user } from "../data/userData";
 import { BACKEND_URL } from "../utils/constants";
 import axios from "axios";
 
-import iconProf from "../resources/chalkboard-user-solid.svg";
-import iconInst from "../resources/building-columns-solid.svg";
-
 const Join = () => {
-  const [typeInst, setTypeInst] = useState(false);
   let navigate = useNavigate();
 
   const [data, setData] = useState({
     name: "",
     email: null,
     password: null,
-    passwordCon: null,
+    confirmPassword: null,
   });
 
   const request = async (e) => {
     e.preventDefault();
     console.log(data);
+
+    try {
+      const res = await axios.post(`${BACKEND_URL}/auth/signup`, {
+        name: data.name,
+        email: data.email,
+        password: data.password,
+        confirmPassword: data.confirmPassword,
+      });
+      console.log(res.data);
+    } catch (e) {
+      alert(e);
+    }
+
     navigate("/auth");
   };
 
@@ -74,7 +82,7 @@ const Join = () => {
             onChange={(e) =>
               setData((prevState) => ({
                 ...prevState,
-                passwordCon: e.target.value,
+                confirmPassword: e.target.value,
               }))
             }
           ></Input>

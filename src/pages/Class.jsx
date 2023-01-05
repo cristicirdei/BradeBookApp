@@ -19,7 +19,14 @@ const Class = () => {
   useEffect(() => {
     const fetchClassData = async () => {
       try {
-        const response = await fetch(`${BACKEND_URL}/classes/${id}`);
+        const response = await fetch(`${BACKEND_URL}/classes/${id}`, {
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: localStorage.getItem("token"),
+          },
+          withCredentials: true,
+        });
         const json = await response.json();
         console.log(json);
         setClass1(json);
@@ -30,7 +37,14 @@ const Class = () => {
 
     const fetchGradesData = async () => {
       try {
-        const response = await fetch(`${BACKEND_URL}/grades/class/${id}`);
+        const response = await fetch(`${BACKEND_URL}/grades/class/${id}`, {
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: localStorage.getItem("token"),
+          },
+          withCredentials: true,
+        });
         const json = await response.json();
         console.log(json);
         setGrades(json);
@@ -41,7 +55,14 @@ const Class = () => {
 
     const fetchAttData = async () => {
       try {
-        const response = await fetch(`${BACKEND_URL}/attendance/class/${id}`);
+        const response = await fetch(`${BACKEND_URL}/attendance/class/${id}`, {
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: localStorage.getItem("token"),
+          },
+          withCredentials: true,
+        });
         const json = await response.json();
         console.log(json);
         setAtt(json);

@@ -1,7 +1,5 @@
 import React from "react";
 
-import cover from "../resources/cover.jpg";
-
 const Landing = () => {
   return (
     <div className="page-over beige">

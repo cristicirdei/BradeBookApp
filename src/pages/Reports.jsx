@@ -10,7 +10,14 @@ const Reports = () => {
     const fetchClassData = async () => {
       try {
         const response = await fetch(
-          `${BACKEND_URL}/classes/all/${user.institution}`
+          `${BACKEND_URL}/classes/all/${user.institution}`, {
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+              Authorization: localStorage.getItem("token"),
+            },
+            withCredentials: true,
+          }
         );
         const json = await response.json();
         console.log(json);
@@ -23,7 +30,14 @@ const Reports = () => {
     const fetchStudentData = async () => {
       try {
         const response = await fetch(
-          `${BACKEND_URL}/students/all/${user.institution}`
+          `${BACKEND_URL}/students/all/${user.institution}`, {
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+              Authorization: localStorage.getItem("token"),
+            },
+            withCredentials: true,
+          }
         );
         const json = await response.json();
         console.log(json);

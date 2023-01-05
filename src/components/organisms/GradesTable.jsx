@@ -16,10 +16,20 @@ const GradesTable = ({ grades, classId }) => {
     e.preventDefault();
     if (changes && changes.length > 0) {
       try {
-        const res = await axios.post(`${BACKEND_URL}/grades/change`, {
-          class: classId,
-          changes: changes,
-        });
+        const res = await axios.post(
+          `${BACKEND_URL}/grades/change`,
+          {
+            class: classId,
+            changes: changes,
+          },
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+              Authorization: localStorage.getItem("token"),
+            },
+          }
+        );
         console.log(res.data);
       } catch (e) {
         alert(e);
@@ -28,11 +38,21 @@ const GradesTable = ({ grades, classId }) => {
 
     if (newGrade) {
       try {
-        const res = await axios.post(`${BACKEND_URL}/grades/new`, {
-          class: classId,
-          gradeName: newGrade,
-          values: newGrades,
-        });
+        const res = await axios.post(
+          `${BACKEND_URL}/grades/new`,
+          {
+            class: classId,
+            gradeName: newGrade,
+            values: newGrades,
+          },
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+              Authorization: localStorage.getItem("token"),
+            },
+          }
+        );
         console.log(res.data);
       } catch (e) {
         alert(e);
@@ -48,28 +68,6 @@ const GradesTable = ({ grades, classId }) => {
   const [newGrade, setNewGrade] = useState();
 
   const class1 = grades;
-
-  const onClick = () => {
-    console.log("new grades", newGrades);
-    console.log("changes", changes);
-    /* if (newGrades.length) {
-      let list = [];
-      newGrades.map(
-        (grade) =>
-          (list = [
-            ...list,
-            {
-              student: grade.student,
-              grade: newGrade,
-              value: grade.value,
-            },
-          ])
-      );
-
-      setChanges([...changes, ...list]);
-      console.log("adding new grade values to changes");
-    }*/
-  };
 
   return (
     <div className="table-container ">

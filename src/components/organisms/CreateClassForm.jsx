@@ -56,6 +56,13 @@ const CreateClassForm = () => {
           teacher: data.teacher,
           description: data.description,
           students: data.students,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: localStorage.getItem("token"),
+          },
         }
       );
       console.log(res.data);

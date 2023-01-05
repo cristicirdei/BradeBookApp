@@ -20,7 +20,14 @@ const Attendance = () => {
     const fetchClassData = async () => {
       try {
         const response = await fetch(
-          `${BACKEND_URL}/classes/teacher/${user.name}`
+          `${BACKEND_URL}/classes/teacher/${user.name}`, {
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+              Authorization: localStorage.getItem("token"),
+            },
+            withCredentials: true,
+          }
         );
         const json = await response.json();
         console.log(json);
@@ -34,7 +41,14 @@ const Attendance = () => {
       if (currentClass !== "") {
         try {
           const response = await fetch(
-            `${BACKEND_URL}/attendance/class/${currentClass}`
+            `${BACKEND_URL}/attendance/class/${currentClass}`, {
+              headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json",
+                Authorization: localStorage.getItem("token"),
+              },
+              withCredentials: true,
+            }
           );
           const json = await response.json();
           console.log(json);

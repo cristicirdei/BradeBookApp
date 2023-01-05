@@ -25,6 +25,13 @@ const AddStudentsForm = () => {
           surname: data.surname,
           nr: data.nr,
           age: data.age,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: localStorage.getItem("token"),
+          }
         }
       );
       console.log(res.data);

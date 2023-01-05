@@ -24,10 +24,20 @@ const AttendanceTable = ({ att, classId }) => {
     e.preventDefault();
     if (changes && changes.length > 0) {
       try {
-        const res = await axios.post(`${BACKEND_URL}/attendance/change`, {
-          class: classId,
-          changes: changes,
-        });
+        const res = await axios.post(
+          `${BACKEND_URL}/attendance/change`,
+          {
+            class: classId,
+            changes: changes,
+          },
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+              Authorization: localStorage.getItem("token"),
+            },
+          }
+        );
         console.log(res.data);
       } catch (e) {
         alert(e);
@@ -36,40 +46,27 @@ const AttendanceTable = ({ att, classId }) => {
 
     if (newDate) {
       try {
-        const res = await axios.post(`${BACKEND_URL}/attendance/new`, {
-          class: classId,
-          date: newDate,
-          values: newAttendance,
-        });
+        const res = await axios.post(
+          `${BACKEND_URL}/attendance/new`,
+          {
+            class: classId,
+            date: newDate,
+            values: newAttendance,
+          },
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+              Authorization: localStorage.getItem("token"),
+            },
+          }
+        );
         console.log(res.data);
       } catch (e) {
         alert(e);
       }
     }
     refresh();
-  };
-
-  const onClick = () => {
-    console.log("changes", changes);
-    console.log("new att", newAttendance);
-
-    if (newAttendance.length) {
-      let list = [];
-      newAttendance.map(
-        (date) =>
-          (list = [
-            ...list,
-            {
-              student: date.student,
-              name: newDate,
-              value: date.value,
-            },
-          ])
-      );
-
-      setChanges([...changes, ...list]);
-      console.log("adding new att values to changes");
-    }
   };
 
   return (

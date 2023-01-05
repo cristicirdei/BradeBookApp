@@ -30,6 +30,13 @@ const AddTeachersForm = () => {
           age: data.age,
           email: data.email,
           password: data.password,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: localStorage.getItem("token"),
+          },
         }
       );
       console.log(res.data);

@@ -19,8 +19,15 @@ import Teacher from "./pages/Teacher";
 import Landing from "./pages/Landing";
 
 import { user } from "./data/userData";
+import useToken from "./utils/useToken";
 
 function App() {
+  /*const { token, setToken } = useToken();
+
+  if (!token) {
+    return <Login setToken={setToken} />;
+  }*/
+
   return (
     <>
       <BrowserRouter>

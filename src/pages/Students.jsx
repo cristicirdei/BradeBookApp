@@ -10,9 +10,19 @@ import { user } from "../data/userData";
 import useFetch from "react-fetch-hook";
 
 const Students = () => {
-  const { isLoading, data } = useFetch(`${BACKEND_URL}/students/all/${user.institution}`, {
-    formatter: (response) => response.json(),
-  });
+  const { isLoading, data } = useFetch(
+    `${BACKEND_URL}/students/all/${user.institution}`,
+    {
+      formatter: (response) => response.json(),
+
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: localStorage.getItem("token"),
+      },
+      withCredentials: true,
+    }
+  );
 
   console.log("data here ");
   console.log(data);

@@ -16,6 +16,13 @@ const Classes = () => {
       : `${BACKEND_URL}/classes/all/${user.institution}`,
     {
       formatter: (response) => response.json(),
+
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: localStorage.getItem("token"),
+      },
+      withCredentials: true,
     }
   );
 

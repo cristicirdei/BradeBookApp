@@ -19,7 +19,15 @@ const Grades = () => {
     const fetchClassData = async () => {
       try {
         const response = await fetch(
-          `${BACKEND_URL}/classes/teacher/${user.name}`
+          `${BACKEND_URL}/classes/teacher/${user.name}`,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+              Authorization: localStorage.getItem("token"),
+            },
+            withCredentials: true,
+          }
         );
         const json = await response.json();
         console.log(json);
@@ -33,7 +41,15 @@ const Grades = () => {
       if (currentClass !== "") {
         try {
           const response = await fetch(
-            `${BACKEND_URL}/grades/class/${currentClass}`
+            `${BACKEND_URL}/grades/class/${currentClass}`,
+            {
+              headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json",
+                Authorization: localStorage.getItem("token"),
+              },
+              withCredentials: true,
+            }
           );
           const json = await response.json();
           console.log(json);
@@ -71,7 +87,11 @@ const Grades = () => {
       <br></br>
       <br></br>
       <br></br>
-      {currentClass !== "" ? <Table grades={grades} classId={currentClass}></Table> : ""}
+      {currentClass !== "" ? (
+        <Table grades={grades} classId={currentClass}></Table>
+      ) : (
+        ""
+      )}
     </div>
   );
 };

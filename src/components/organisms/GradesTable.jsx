@@ -2,10 +2,45 @@ import React, { useState } from "react";
 import fontawesome from "@fortawesome/fontawesome";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSquarePlus } from "@fortawesome/free-solid-svg-icons";
+import { user } from "../../data/userData";
+import { BACKEND_URL } from "../../utils/constants";
+import axios from "axios";
 
 fontawesome.library.add(faSquarePlus);
 
-const GradesTable = ({ grades }) => {
+const GradesTable = ({ grades, classId }) => {
+  const adm = user.type === "admin" ? "admin" : "user";
+
+  const refresh = () => window.location.reload(true);
+  const request = async (e) => {
+    e.preventDefault();
+    if (changes && changes.length > 0) {
+      try {
+        const res = await axios.post(`${BACKEND_URL}/grades/change`, {
+          class: classId,
+          changes: changes,
+        });
+        console.log(res.data);
+      } catch (e) {
+        alert(e);
+      }
+    }
+
+    if (newGrade) {
+      try {
+        const res = await axios.post(`${BACKEND_URL}/grades/new`, {
+          class: classId,
+          gradeName: newGrade,
+          values: newGrades,
+        });
+        console.log(res.data);
+      } catch (e) {
+        alert(e);
+      }
+    }
+    refresh();
+  };
+
   const [changes, setChanges] = useState([]);
   const [newGrades, setNewGrades] = useState([]);
 
@@ -15,8 +50,9 @@ const GradesTable = ({ grades }) => {
   const class1 = grades;
 
   const onClick = () => {
-    /*console.log("new grades", newGrades);*/
-    if (newGrades.length) {
+    console.log("new grades", newGrades);
+    console.log("changes", changes);
+    /* if (newGrades.length) {
       let list = [];
       newGrades.map(
         (grade) =>
@@ -32,7 +68,7 @@ const GradesTable = ({ grades }) => {
 
       setChanges([...changes, ...list]);
       console.log("adding new grade values to changes");
-    }
+    }*/
   };
 
   return (
@@ -150,7 +186,7 @@ const GradesTable = ({ grades }) => {
               setAddNew(true);
             }}
           >
-            <span>
+            <span className={`${adm}-color`}>
               <FontAwesomeIcon icon="square-plus" />
             </span>
             Add Grade
@@ -162,10 +198,8 @@ const GradesTable = ({ grades }) => {
           <input
             type="submit"
             value="Save Changes"
-            onClick={(e) => {
-              onClick();
-              console.log("changes: ", changes);
-            }}
+            className={`${adm}`}
+            onClick={request}
           ></input>
         </div>
       ) : (

@@ -7,6 +7,7 @@ import GradesTableView from "../components/organisms/GradesTableView";
 import AttendanceTableView from "../components/organisms/AttendanceTableView";
 import { useParams } from "react-router-dom";
 import { BACKEND_URL } from "../utils/constants";
+import { user } from "../data/userData";
 
 const Class = () => {
   let { id } = useParams();
@@ -54,12 +55,14 @@ const Class = () => {
     fetchAttData();
   }, [id]);
 
+  const adm = user.type === "admin" ? "admin" : "user";
+
   return (
     <div className="page">
       <div className="class-details">
         <div className="container">
           <div className="details-zone">
-            <h2>{class1.name}</h2>
+            <h2 className={`${adm}-color`}>{class1.name}</h2>
             <p>Subject: {class1.subject}</p>
             <p>Teacher: {class1.teacher}</p>
             <p>About: {class1.description}</p>
@@ -69,7 +72,7 @@ const Class = () => {
         </div>
 
         <div className="students-zone">
-          <h2>Students</h2>
+          <h2 className={`${adm}-color`}>Students</h2>
 
           <div className="list">
             {class1.students && class1.students.length > 0

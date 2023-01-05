@@ -2,10 +2,15 @@ import React, { useState } from "react";
 import fontawesome from "@fortawesome/fontawesome";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSquarePlus } from "@fortawesome/free-solid-svg-icons";
+import { user } from "../../data/userData";
+import { BACKEND_URL } from "../../utils/constants";
+import axios from "axios";
 
 fontawesome.library.add(faSquarePlus);
 
-const AttendanceTable = ({ att }) => {
+const AttendanceTable = ({ att, classId }) => {
+  const adm = user.type === "admin" ? "admin" : "user";
+
   const [changes, setChanges] = useState([]);
   const [newAttendance, setNewAttendance] = useState([]);
 
@@ -14,7 +19,40 @@ const AttendanceTable = ({ att }) => {
 
   const classAttendance = att;
 
+  const refresh = () => window.location.reload(true);
+  const request = async (e) => {
+    e.preventDefault();
+    if (changes && changes.length > 0) {
+      try {
+        const res = await axios.post(`${BACKEND_URL}/attendance/change`, {
+          class: classId,
+          changes: changes,
+        });
+        console.log(res.data);
+      } catch (e) {
+        alert(e);
+      }
+    }
+
+    if (newDate) {
+      try {
+        const res = await axios.post(`${BACKEND_URL}/attendance/new`, {
+          class: classId,
+          date: newDate,
+          values: newAttendance,
+        });
+        console.log(res.data);
+      } catch (e) {
+        alert(e);
+      }
+    }
+    refresh();
+  };
+
   const onClick = () => {
+    console.log("changes", changes);
+    console.log("new att", newAttendance);
+
     if (newAttendance.length) {
       let list = [];
       newAttendance.map(
@@ -172,7 +210,7 @@ const AttendanceTable = ({ att }) => {
               setAddNew(true);
             }}
           >
-            <span>
+            <span className={`${adm}-color`}>
               <FontAwesomeIcon icon="square-plus" />
             </span>
             Add Date
@@ -184,10 +222,8 @@ const AttendanceTable = ({ att }) => {
           <input
             type="submit"
             value="Save Changes"
-            onClick={(e) => {
-              onClick();
-              console.log("changes: ", changes);
-            }}
+            className={`${adm}`}
+            onClick={request}
           ></input>
         </div>
       ) : (

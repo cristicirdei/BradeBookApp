@@ -15,8 +15,8 @@ const LoginForm = () => {
 
   const request = async (e) => {
     e.preventDefault();
-
-    navigate("/");
+    console.log(data);
+    navigate("/welcome");
   };
 
   return (

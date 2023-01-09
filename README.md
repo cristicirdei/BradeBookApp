@@ -1,3 +1,6 @@
+# App Server implemented at [gradebook-server](https://github.com/cristicirdei/gradebook-server.git)
+
+
 # Some rules:
 1. Create a new branch when working (!! do not edit on main)
 2. Create a `Pull Request` when you want to merge and ask for feedback before merging

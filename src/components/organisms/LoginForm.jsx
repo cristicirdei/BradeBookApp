@@ -1,9 +1,24 @@
 import React, { useState } from "react";
 import Input from "../molecules/Input";
-import { user } from "../../data/userData";
 import { BACKEND_URL } from "../../utils/constants";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+
+function parseJwt(token) {
+  var base64Url = token.split(".")[1];
+  var base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+  var jsonPayload = decodeURIComponent(
+    window
+      .atob(base64)
+      .split("")
+      .map(function (c) {
+        return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+      })
+      .join("")
+  );
+
+  return JSON.parse(jsonPayload);
+}
 
 const LoginForm = () => {
   let navigate = useNavigate();
@@ -15,8 +30,44 @@ const LoginForm = () => {
 
   const request = async (e) => {
     e.preventDefault();
+    console.log(data);
 
-    navigate("/");
+    try {
+      const res = await axios.post(`${BACKEND_URL}/auth/login`, {
+        email: data.email,
+        password: data.password,
+      });
+      console.log("login data: ", res.data);
+
+      localStorage.setItem("token", res.data.token);
+
+      let token = res.data.token;
+
+      if (token !== null && token !== undefined) {
+        const decoded = parseJwt(token);
+
+        const user = {
+          email: decoded.email,
+          id: decoded.id,
+          auth: true,
+          institution: decoded.institution,
+          type: decoded.type,
+          name: decoded.name,
+        };
+        localStorage.setItem("user", JSON.stringify(user));
+        console.log("user", user);
+
+        if (decoded.exp * 1000 < new Date().getTime()) {
+          localStorage.clear();
+        } else {
+        }
+      }
+    } catch (e) {
+      alert(e);
+    }
+
+    navigate("/welcome");
+    window.location.reload(false);
   };
 
   return (
@@ -53,4 +104,5 @@ const LoginForm = () => {
     </form>
   );
 };
+
 export default LoginForm;

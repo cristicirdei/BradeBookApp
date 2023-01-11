@@ -14,6 +14,7 @@ import "../src/styles/Class.scss";
 import "../src/styles/Auth.scss";
 import "../src/styles/Student.scss";
 import "../src/styles/Reports.scss";
+import "../src/styles/Landing.scss"
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(<App />);

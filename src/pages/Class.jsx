@@ -8,6 +8,8 @@ import AttendanceTableView from "../components/organisms/AttendanceTableView";
 import { useParams } from "react-router-dom";
 import { BACKEND_URL } from "../utils/constants";
 
+const user = JSON.parse(localStorage.getItem("user"));
+
 const Class = () => {
   let { id } = useParams();
 
@@ -18,7 +20,14 @@ const Class = () => {
   useEffect(() => {
     const fetchClassData = async () => {
       try {
-        const response = await fetch(`${BACKEND_URL}/classes/${id}`);
+        const response = await fetch(`${BACKEND_URL}/classes/${id}`, {
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: localStorage.getItem("token"),
+          },
+          withCredentials: true,
+        });
         const json = await response.json();
         console.log(json);
         setClass1(json);
@@ -29,7 +38,14 @@ const Class = () => {
 
     const fetchGradesData = async () => {
       try {
-        const response = await fetch(`${BACKEND_URL}/grades/class/${id}`);
+        const response = await fetch(`${BACKEND_URL}/grades/class/${id}`, {
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: localStorage.getItem("token"),
+          },
+          withCredentials: true,
+        });
         const json = await response.json();
         console.log(json);
         setGrades(json);
@@ -40,7 +56,14 @@ const Class = () => {
 
     const fetchAttData = async () => {
       try {
-        const response = await fetch(`${BACKEND_URL}/attendance/class/${id}`);
+        const response = await fetch(`${BACKEND_URL}/attendance/class/${id}`, {
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: localStorage.getItem("token"),
+          },
+          withCredentials: true,
+        });
         const json = await response.json();
         console.log(json);
         setAtt(json);
@@ -54,12 +77,14 @@ const Class = () => {
     fetchAttData();
   }, [id]);
 
+  const adm = user.type === "admin" ? "admin" : "user";
+
   return (
     <div className="page">
       <div className="class-details">
         <div className="container">
           <div className="details-zone">
-            <h2>{class1.name}</h2>
+            <h2 className={`${adm}-color`}>{class1.name}</h2>
             <p>Subject: {class1.subject}</p>
             <p>Teacher: {class1.teacher}</p>
             <p>About: {class1.description}</p>
@@ -69,7 +94,7 @@ const Class = () => {
         </div>
 
         <div className="students-zone">
-          <h2>Students</h2>
+          <h2 className={`${adm}-color`}>Students</h2>
 
           <div className="list">
             {class1.students && class1.students.length > 0

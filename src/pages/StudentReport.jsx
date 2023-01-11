@@ -14,6 +14,13 @@ const StudentReport = () => {
 
   const { isLoading, data } = useFetch(`${BACKEND_URL}/students/${id}`, {
     formatter: (response) => response.json(),
+
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+      Authorization: localStorage.getItem("token"),
+    },
+    withCredentials: true,
   });
 
   console.log("student data here ");
@@ -22,7 +29,7 @@ const StudentReport = () => {
 
   return (
     <div className="page">
-      <h1>StudentReport</h1>
+      <h1>Student Report</h1>
       {isLoading ? (
         "..loading"
       ) : (

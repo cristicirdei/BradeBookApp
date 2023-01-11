@@ -2,10 +2,38 @@ import React, { useState } from "react";
 import fontawesome from "@fortawesome/fontawesome";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSquarePlus } from "@fortawesome/free-solid-svg-icons";
+import { BACKEND_URL } from "../../utils/constants";
+import axios from "axios";
+
+const user = JSON.parse(localStorage.getItem("user"));
 
 fontawesome.library.add(faSquarePlus);
 
-const AttendanceTable = ({ att }) => {
+const AttendanceTable = ({ att, classId }) => {
+  const adm = user.type === "admin" ? "admin" : "user";
+
+  /* useEffect(() => {
+    const fetchStudentsData = async () => {
+      try {
+        const response = await fetch(
+          `${BACKEND_URL}/students/all/${user.institution}`,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+              Authorization: localStorage.getItem("token"),
+            },
+          }
+        );
+        const json = await response.json();
+        setStudents(json);
+      } catch (error) {
+        console.log("error", error);
+      }
+    };
+    fetchStudentsData();
+  }, []);*/
+
   const [changes, setChanges] = useState([]);
   const [newAttendance, setNewAttendance] = useState([]);
 
@@ -14,24 +42,58 @@ const AttendanceTable = ({ att }) => {
 
   const classAttendance = att;
 
-  const onClick = () => {
-    if (newAttendance.length) {
-      let list = [];
-      newAttendance.map(
-        (date) =>
-          (list = [
-            ...list,
-            {
-              student: date.student,
-              name: newDate,
-              value: date.value,
-            },
-          ])
-      );
+  const refresh = () => window.location.reload(true);
 
-      setChanges([...changes, ...list]);
-      console.log("adding new att values to changes");
+  const request = async (e) => {
+    e.preventDefault();
+    console.log("request called");
+    if (changes && changes.length > 0) {
+      console.log("mod att", changes);
+      try {
+        const res = await axios.post(
+          `${BACKEND_URL}/attendance/change`,
+          {
+            class: classId,
+            changes: changes,
+          },
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+              Authorization: localStorage.getItem("token"),
+            },
+          }
+        );
+        console.log(res.data);
+      } catch (e) {
+        alert(e);
+      }
     }
+
+    if (newDate) {
+      console.log("new att", newAttendance);
+      try {
+        const res = await axios.post(
+          `${BACKEND_URL}/attendance/new`,
+          {
+            class: classId,
+            date: newDate,
+            values: newAttendance,
+          },
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+              Authorization: localStorage.getItem("token"),
+            },
+          }
+        );
+        console.log(res.data);
+      } catch (e) {
+        alert(e);
+      }
+    }
+    refresh();
   };
 
   return (
@@ -39,7 +101,11 @@ const AttendanceTable = ({ att }) => {
       <table>
         <thead>
           <tr>
-            <th>Student</th>
+            {classAttendance.dates.length > 0 ? (
+              <th>Student</th>
+            ) : (
+              <th>No dates yet</th>
+            )}
             {classAttendance.dates.map((date, index) => (
               <th key={index}>{date}</th>
             ))}
@@ -172,7 +238,7 @@ const AttendanceTable = ({ att }) => {
               setAddNew(true);
             }}
           >
-            <span>
+            <span className={`${adm}-color`}>
               <FontAwesomeIcon icon="square-plus" />
             </span>
             Add Date
@@ -184,10 +250,8 @@ const AttendanceTable = ({ att }) => {
           <input
             type="submit"
             value="Save Changes"
-            onClick={(e) => {
-              onClick();
-              console.log("changes: ", changes);
-            }}
+            className={`${adm}`}
+            onClick={request}
           ></input>
         </div>
       ) : (

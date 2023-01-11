@@ -2,10 +2,93 @@ import React, { useState } from "react";
 import fontawesome from "@fortawesome/fontawesome";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSquarePlus } from "@fortawesome/free-solid-svg-icons";
+import { BACKEND_URL } from "../../utils/constants";
+import axios from "axios";
+
+const user = JSON.parse(localStorage.getItem("user"));
 
 fontawesome.library.add(faSquarePlus);
 
-const GradesTable = ({ grades }) => {
+const GradesTable = ({ grades, classId }) => {
+  const adm = user.type === "admin" ? "admin" : "user";
+
+  const refresh = () => window.location.reload(true);
+
+  const request = async (e) => {
+    e.preventDefault();
+    console.log("request called");
+    if (changes && changes.length > 0) {
+      console.log("mod grd ", changes);
+      try {
+        const res = await axios.post(
+          `${BACKEND_URL}/grades/change`,
+          {
+            class: classId,
+            changes: changes,
+          },
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+              Authorization: localStorage.getItem("token"),
+            },
+          }
+        );
+        console.log(res.data);
+      } catch (e) {
+        alert(e);
+      }
+    }
+
+    if (newGrade) {
+      console.log("new grd ", changes);
+      try {
+        const res = await axios.post(
+          `${BACKEND_URL}/grades/new`,
+          {
+            class: classId,
+            gradeName: newGrade,
+            values: newGrades,
+          },
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+              Authorization: localStorage.getItem("token"),
+            },
+          }
+        );
+        console.log(res.data);
+      } catch (e) {
+        alert(e);
+      }
+    }
+    refresh();
+  };
+
+  /*useEffect(() => {
+    const fetchStudentsData = async () => {
+      try {
+        const response = await fetch(
+          `${BACKEND_URL}/students/all/${user.institution}`,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+              Authorization: localStorage.getItem("token"),
+            },
+          }
+        );
+        const json = await response.json();
+        console.log(json);
+        setStudents(json);
+      } catch (error) {
+        console.log("error", error);
+      }
+    };
+    fetchStudentsData();
+  }, []);*/
+
   const [changes, setChanges] = useState([]);
   const [newGrades, setNewGrades] = useState([]);
 
@@ -14,33 +97,16 @@ const GradesTable = ({ grades }) => {
 
   const class1 = grades;
 
-  const onClick = () => {
-    /*console.log("new grades", newGrades);*/
-    if (newGrades.length) {
-      let list = [];
-      newGrades.map(
-        (grade) =>
-          (list = [
-            ...list,
-            {
-              student: grade.student,
-              grade: newGrade,
-              value: grade.value,
-            },
-          ])
-      );
-
-      setChanges([...changes, ...list]);
-      console.log("adding new grade values to changes");
-    }
-  };
-
   return (
     <div className="table-container ">
       <table>
         <thead>
           <tr>
-            <th>Student</th>
+            {class1.grades.length > 0 ? (
+              <th>Student</th>
+            ) : (
+              <th>No grades yet</th>
+            )}
             {class1.grades.map((gradeName, index) => (
               <th key={index}>{gradeName}</th>
             ))}
@@ -150,7 +216,7 @@ const GradesTable = ({ grades }) => {
               setAddNew(true);
             }}
           >
-            <span>
+            <span className={`${adm}-color`}>
               <FontAwesomeIcon icon="square-plus" />
             </span>
             Add Grade
@@ -162,10 +228,8 @@ const GradesTable = ({ grades }) => {
           <input
             type="submit"
             value="Save Changes"
-            onClick={(e) => {
-              onClick();
-              console.log("changes: ", changes);
-            }}
+            className={`${adm}`}
+            onClick={request}
           ></input>
         </div>
       ) : (

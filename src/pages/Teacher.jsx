@@ -8,6 +8,14 @@ const Teacher = () => {
 
   const { isLoading, data } = useFetch(`${BACKEND_URL}/teachers/${id}`, {
     formatter: (response) => response.json(),
+    
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: localStorage.getItem("token"),
+      },
+      withCredentials: true,
+    
   });
 
   console.log("student data here ");

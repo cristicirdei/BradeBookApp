@@ -16,10 +16,19 @@ import Header from "./components/molecules/Header";
 import Login from "./pages/Login";
 import Join from "./pages/Join";
 import Teacher from "./pages/Teacher";
+import Landing from "./pages/Landing";
 
-import { user } from "./data/userData";
+const user = JSON.parse(localStorage.getItem("user")) || {
+  type: "user",
+};
 
 function App() {
+  /*const { token, setToken } = useToken();
+
+  if (!token) {
+    return <Login setToken={setToken} />;
+  }*/
+
   return (
     <>
       <BrowserRouter>
@@ -28,7 +37,7 @@ function App() {
         <div className="col-10">
           {user.type === "admin" && (
             <Routes>
-              <Route path="/" element={<LandingPage />} />
+              <Route path="/welcome" element={<LandingPage />} />
               <Route path="/classes" element={<Classes />} />
               <Route path="/students" element={<Students />} />
               <Route path="/teachers" element={<Teachers />} />
@@ -44,7 +53,7 @@ function App() {
 
           {user.type === "teacher" && (
             <Routes>
-              <Route path="/" element={<LandingPage />} />
+              <Route path="/welcome" element={<LandingPage />} />
               <Route path="/classes" element={<Classes />} />
               <Route path="/add/grades" element={<Grades />} />
               <Route path="/add/attendance" element={<Attendance />} />
@@ -59,6 +68,7 @@ function App() {
           <Routes>
             <Route path="/auth" element={<Login />} />
             <Route path="/auth/join" element={<Join />} />
+            <Route path="/" element={<Landing />} />
           </Routes>
         </div>
       </BrowserRouter>

@@ -1,4 +1,4 @@
-$themeColor: #FF8402;
+$themeColor: #173F5F;
 $shadowColor: rgba(193, 193, 193, 0.2);
 $shadowColor2: rgba(193, 193, 193, 0.4);
 $shadowColor3: rgba(193, 193, 193, 0.6);
@@ -89,12 +89,12 @@ $shadowColor3: rgba(193, 193, 193, 0.6);
 
     .square:nth-of-type(2n+1) {
         //  margin: 0 0.5rem 0 0;
-        color: #FF8402;
+        color: #173F5F;
     }
 
     .square:nth-of-type(2n) {
         // margin: 0 0 0 0.5rem;
-        color: #FF8402;
+        color: #173F5F;
     }
 
 
@@ -161,6 +161,37 @@ $shadowColor3: rgba(193, 193, 193, 0.6);
     }
 
 
+}
+
+.navlinks {
+    border-radius: 10px;
+
+    margin-right: 1rem;
+    margin-top: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    float: right;
+    background-color: #000;
+    color: #fff;
+}
+
+.navlinks a {
+    border-radius: 10px;
+
+    text-decoration: none;
+    color: #fff;
+    font-weight: 400;
+    padding: 0.5rem 0.5rem;
+}
+
+.navlinks a:hover {
+    border-radius: 10px;
+
+    background-color: #fff;
+    cursor: pointer;
+    color: #000;
+    transition: 0.3s all;
 }
 
 @media screen and (max-width: 768px) {

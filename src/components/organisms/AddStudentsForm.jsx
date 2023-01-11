@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import Input from "../molecules/Input";
-import { user } from "../../data/userData";
 import { BACKEND_URL } from "../../utils/constants";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+
+const user = JSON.parse(localStorage.getItem("user"));
 
 const AddStudentsForm = () => {
   let navigate = useNavigate();
@@ -25,6 +26,13 @@ const AddStudentsForm = () => {
           surname: data.surname,
           nr: data.nr,
           age: data.age,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: localStorage.getItem("token"),
+          }
         }
       );
       console.log(res.data);

@@ -1,11 +1,16 @@
 import React from "react";
 import MenuButton from "../atoms/MenuButton";
-import { user } from "../../data/userData";
+
+const user = JSON.parse(localStorage.getItem("user")) || { type: "user" };
 
 const Menu = () => {
+  //window.location.reload(false);
+
   return (
     <div className="col-2 menu">
-      <h1 className="dash-title">Dashboard</h1>
+      <h1 className="dash-title">
+        {user.type === "admin" ? "Admin" : "Teacher"} Dashboard
+      </h1>
       {user.type === "admin" && (
         <>
           <MenuButton link="/classes" page="Classes"></MenuButton>

@@ -7,9 +7,10 @@ import { useNavigate } from "react-router-dom";
 import Input from "../molecules/Input";
 import Select from "../molecules/Select";
 import Textarea from "../molecules/Textarea";
-import { user } from "../../data/userData";
 import { BACKEND_URL } from "../../utils/constants";
 import axios from "axios";
+
+const user = JSON.parse(localStorage.getItem("user"));
 
 const CreateClassForm = () => {
   let navigate = useNavigate();
@@ -53,9 +54,16 @@ const CreateClassForm = () => {
           name: data.name,
           subject: data.subject,
           nr: data.nr,
-          teacher: data.teacher,
+          teacherID: data.teacher,
           description: data.description,
           students: data.students,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: localStorage.getItem("token"),
+          },
         }
       );
       console.log(res.data);
@@ -69,7 +77,14 @@ const CreateClassForm = () => {
     const fetchStudentsData = async () => {
       try {
         const response = await fetch(
-          `${BACKEND_URL}/students/all/${user.institution}`
+          `${BACKEND_URL}/students/all/${user.institution}`,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+              Authorization: localStorage.getItem("token"),
+            },
+          }
         );
         const json = await response.json();
         console.log(json);
@@ -82,7 +97,14 @@ const CreateClassForm = () => {
     const fetchTeachersData = async () => {
       try {
         const response = await fetch(
-          `${BACKEND_URL}/teachers/all/${user.institution}`
+          `${BACKEND_URL}/teachers/all/${user.institution}`,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+              Authorization: localStorage.getItem("token"),
+            },
+          }
         );
         const json = await response.json();
         console.log(json);

@@ -2,14 +2,37 @@ import React, { useState } from "react";
 import fontawesome from "@fortawesome/fontawesome";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSquarePlus } from "@fortawesome/free-solid-svg-icons";
-import { user } from "../../data/userData";
 import { BACKEND_URL } from "../../utils/constants";
 import axios from "axios";
+
+const user = JSON.parse(localStorage.getItem("user"));
 
 fontawesome.library.add(faSquarePlus);
 
 const AttendanceTable = ({ att, classId }) => {
   const adm = user.type === "admin" ? "admin" : "user";
+
+  /* useEffect(() => {
+    const fetchStudentsData = async () => {
+      try {
+        const response = await fetch(
+          `${BACKEND_URL}/students/all/${user.institution}`,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+              Authorization: localStorage.getItem("token"),
+            },
+          }
+        );
+        const json = await response.json();
+        setStudents(json);
+      } catch (error) {
+        console.log("error", error);
+      }
+    };
+    fetchStudentsData();
+  }, []);*/
 
   const [changes, setChanges] = useState([]);
   const [newAttendance, setNewAttendance] = useState([]);
@@ -20,9 +43,12 @@ const AttendanceTable = ({ att, classId }) => {
   const classAttendance = att;
 
   const refresh = () => window.location.reload(true);
+
   const request = async (e) => {
     e.preventDefault();
+    console.log("request called");
     if (changes && changes.length > 0) {
+      console.log("mod att", changes);
       try {
         const res = await axios.post(
           `${BACKEND_URL}/attendance/change`,
@@ -45,6 +71,7 @@ const AttendanceTable = ({ att, classId }) => {
     }
 
     if (newDate) {
+      console.log("new att", newAttendance);
       try {
         const res = await axios.post(
           `${BACKEND_URL}/attendance/new`,
@@ -74,7 +101,11 @@ const AttendanceTable = ({ att, classId }) => {
       <table>
         <thead>
           <tr>
-            <th>Student</th>
+            {classAttendance.dates.length > 0 ? (
+              <th>Student</th>
+            ) : (
+              <th>No dates yet</th>
+            )}
             {classAttendance.dates.map((date, index) => (
               <th key={index}>{date}</th>
             ))}

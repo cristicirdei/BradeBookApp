@@ -6,13 +6,15 @@ import React from "react";
 import ClassCard from "../components/molecules/ClassCard";
 import AddButton from "../components/atoms/AddButton";
 import { BACKEND_URL } from "../utils/constants";
-import { user } from "../data/userData";
 import useFetch from "react-fetch-hook";
+
+const user = JSON.parse(localStorage.getItem("user"));
+console.log("from classes ", user);
 
 const Classes = () => {
   const { isLoading, data } = useFetch(
     user.type === "teacher"
-      ? `${BACKEND_URL}/classes/teacher/${user.name}`
+      ? `${BACKEND_URL}/classes/teacher/${user.id}`
       : `${BACKEND_URL}/classes/all/${user.institution}`,
     {
       formatter: (response) => response.json(),
@@ -39,7 +41,7 @@ const Classes = () => {
         "..loading"
       ) : (
         <div className="classes-container">
-          {classesList.payload && classesList.payload.length > 0
+          {classesList && classesList.payload && classesList.payload.length > 0
             ? classesList.payload.map((c, index) => (
                 <ClassCard
                   link={`/view/class/${c.id}`}

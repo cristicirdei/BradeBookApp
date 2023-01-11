@@ -1,13 +1,19 @@
-const user = {
-  institution: 7,
+const user1 = {
+  institution: 1,
   type0: "admin",
   type: "teacher",
   name1: "Antonia Kulas",
   name: "Samantha Schinner",
   email: "",
-  id: 0,
+  id: 1,
   auth: true,
 };
+
+const user = localStorage.getItem("user") || {
+  type: "teacher",
+  auth: false,
+};
+
 /*
 function parseJwt(token) {
   var base64Url = token.split(".")[1];

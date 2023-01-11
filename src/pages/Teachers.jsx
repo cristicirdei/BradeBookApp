@@ -5,9 +5,10 @@ page with all students
 import React from "react";
 import TeacherCard from "../components/molecules/TeacherCard";
 import AddButton from "../components/atoms/AddButton";
-import { user } from "../data/userData";
 import { BACKEND_URL } from "../utils/constants";
 import useFetch from "react-fetch-hook";
+
+const user = JSON.parse(localStorage.getItem("user"));
 
 const Teachers = () => {
   const { isLoading, data } = useFetch(
@@ -45,7 +46,7 @@ const Teachers = () => {
                   name={teacher.name}
                 ></TeacherCard>
               ))
-            : "no teachers found"}
+            : "No teachers found"}
           {user.type === "admin" && (
             <AddButton link="/add/teachers" page="Add Teacher"></AddButton>
           )}

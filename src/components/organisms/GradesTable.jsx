@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import fontawesome from "@fortawesome/fontawesome";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSquarePlus } from "@fortawesome/free-solid-svg-icons";
-import { user } from "../../data/userData";
 import { BACKEND_URL } from "../../utils/constants";
 import axios from "axios";
+
+const user = JSON.parse(localStorage.getItem("user"));
 
 fontawesome.library.add(faSquarePlus);
 
@@ -12,9 +13,12 @@ const GradesTable = ({ grades, classId }) => {
   const adm = user.type === "admin" ? "admin" : "user";
 
   const refresh = () => window.location.reload(true);
+
   const request = async (e) => {
     e.preventDefault();
+    console.log("request called");
     if (changes && changes.length > 0) {
+      console.log("mod grd ", changes);
       try {
         const res = await axios.post(
           `${BACKEND_URL}/grades/change`,
@@ -37,6 +41,7 @@ const GradesTable = ({ grades, classId }) => {
     }
 
     if (newGrade) {
+      console.log("new grd ", changes);
       try {
         const res = await axios.post(
           `${BACKEND_URL}/grades/new`,
@@ -61,6 +66,29 @@ const GradesTable = ({ grades, classId }) => {
     refresh();
   };
 
+  /*useEffect(() => {
+    const fetchStudentsData = async () => {
+      try {
+        const response = await fetch(
+          `${BACKEND_URL}/students/all/${user.institution}`,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+              Authorization: localStorage.getItem("token"),
+            },
+          }
+        );
+        const json = await response.json();
+        console.log(json);
+        setStudents(json);
+      } catch (error) {
+        console.log("error", error);
+      }
+    };
+    fetchStudentsData();
+  }, []);*/
+
   const [changes, setChanges] = useState([]);
   const [newGrades, setNewGrades] = useState([]);
 
@@ -74,7 +102,11 @@ const GradesTable = ({ grades, classId }) => {
       <table>
         <thead>
           <tr>
-            <th>Student</th>
+            {class1.grades.length > 0 ? (
+              <th>Student</th>
+            ) : (
+              <th>No grades yet</th>
+            )}
             {class1.grades.map((gradeName, index) => (
               <th key={index}>{gradeName}</th>
             ))}

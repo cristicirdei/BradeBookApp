@@ -13,6 +13,47 @@ $shadowColor3: rgba(193, 193, 193, 0.6);
     background-color: rgb(253, 253, 249);
 }
 
+.manage-container {
+    display: flex;
+    flex-direction: row;
+    margin-top: 1rem;
+
+    .manage {
+        @include bordered;
+        height: 15rem;
+        width: 20rem;
+        margin: 1rem;
+        display: flex;
+        flex-direction: column;
+        padding: 2rem;
+        align-items: center;
+
+        img {
+            height: 5rem;
+            margin-top: 2rem;
+        }
+    }
+
+    .manage-small {
+        @include bordered;
+        height: fit-content;
+        width: 20rem;
+        margin: 1rem;
+        display: flex;
+        flex-direction: column;
+        padding: 2rem;
+        align-items: center;
+
+        img {
+            height: 1.5rem;
+        }
+
+        span {
+            margin-right: 1rem;
+        }
+    }
+}
+
 .container-land {
     display: flex;
     flex-direction: column;
@@ -49,6 +90,11 @@ $shadowColor3: rgba(193, 193, 193, 0.6);
         justify-content: center;
         overflow: hidden;
         position: relative;
+
+        h2 {
+            margin-top: 15rem;
+            font-family: 'Playfair Display', sans-serif;
+        }
     }
 
     .blob-c {
@@ -190,9 +236,11 @@ $shadowColor3: rgba(193, 193, 193, 0.6);
         font-weight: 900;
         color: black;
         line-height: .9em;
-        position: absolute;
+        // position: absolute;
         z-index: 4;
-        //text-shadow: 2px 3px 15px rgba(0, 0, 0, .15);
+        text-shadow: 2px 3px 15px rgba(0, 0, 0, .15);
     }
+
+
 
 }

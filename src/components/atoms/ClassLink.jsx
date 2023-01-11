@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { user } from "../../data/userData";
+
+const user = JSON.parse(localStorage.getItem("user"));
 
 const ClassLink = ({ page, link }) => {
   const adm = user.type === "admin" ? "admin" : "user";

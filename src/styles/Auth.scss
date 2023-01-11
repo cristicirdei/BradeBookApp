@@ -163,6 +163,37 @@ $shadowColor3: rgba(193, 193, 193, 0.6);
 
 }
 
+.navlinks {
+    border-radius: 10px;
+
+    margin-right: 1rem;
+    margin-top: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    float: right;
+    background-color: #000;
+    color: #fff;
+}
+
+.navlinks a {
+    border-radius: 10px;
+
+    text-decoration: none;
+    color: #fff;
+    font-weight: 400;
+    padding: 0.5rem 0.5rem;
+}
+
+.navlinks a:hover {
+    border-radius: 10px;
+
+    background-color: #fff;
+    cursor: pointer;
+    color: #000;
+    transition: 0.3s all;
+}
+
 @media screen and (max-width: 768px) {
 
     .join-container,

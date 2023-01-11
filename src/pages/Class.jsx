@@ -7,7 +7,8 @@ import GradesTableView from "../components/organisms/GradesTableView";
 import AttendanceTableView from "../components/organisms/AttendanceTableView";
 import { useParams } from "react-router-dom";
 import { BACKEND_URL } from "../utils/constants";
-import { user } from "../data/userData";
+
+const user = JSON.parse(localStorage.getItem("user"));
 
 const Class = () => {
   let { id } = useParams();

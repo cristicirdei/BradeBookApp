@@ -18,8 +18,9 @@ import Join from "./pages/Join";
 import Teacher from "./pages/Teacher";
 import Landing from "./pages/Landing";
 
-import { user } from "./data/userData";
-import useToken from "./utils/useToken";
+const user = JSON.parse(localStorage.getItem("user")) || {
+  type: "user",
+};
 
 function App() {
   /*const { token, setToken } = useToken();

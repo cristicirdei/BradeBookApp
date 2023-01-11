@@ -6,8 +6,9 @@ import React from "react";
 import StudentCard from "../components/molecules/StudentCard";
 import AddButton from "../components/atoms/AddButton";
 import { BACKEND_URL } from "../utils/constants";
-import { user } from "../data/userData";
 import useFetch from "react-fetch-hook";
+
+const user = JSON.parse(localStorage.getItem("user"));
 
 const Students = () => {
   const { isLoading, data } = useFetch(
@@ -37,7 +38,9 @@ const Students = () => {
         "..loading"
       ) : (
         <div className="classes-container">
-          {studentsList.payload && studentsList.payload.length > 0
+          {studentsList &&
+          studentsList.payload &&
+          studentsList.payload.length > 0
             ? studentsList.payload.map((student, index) => (
                 <StudentCard
                   key={index}
@@ -45,7 +48,7 @@ const Students = () => {
                   name={student.name}
                 ></StudentCard>
               ))
-            : "no students found"}
+            : "No students found"}
           {user.type === "admin" && (
             <AddButton link="/add/students" page="Add Student"></AddButton>
           )}

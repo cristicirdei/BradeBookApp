@@ -3,19 +3,20 @@ import { useParams } from "react-router-dom";
 import { BACKEND_URL } from "../utils/constants";
 import useFetch from "react-fetch-hook";
 
+import teacherIcon from "../resources/teacher-user-solid.svg";
+
 const Teacher = () => {
   let { id } = useParams();
 
   const { isLoading, data } = useFetch(`${BACKEND_URL}/teachers/${id}`, {
     formatter: (response) => response.json(),
-    
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-        Authorization: localStorage.getItem("token"),
-      },
-      withCredentials: true,
-    
+
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+      Authorization: localStorage.getItem("token"),
+    },
+    withCredentials: true,
   });
 
   console.log("student data here ");
@@ -29,10 +30,16 @@ const Teacher = () => {
         {isLoading ? (
           "..loading"
         ) : (
-          <div className="details-zone">
-            <h2>{teacher.name}</h2>
-            <p>ID: {teacher.nr}</p>
-            <p>Classes: {teacher.classes.map((c) => c + " | ")}</p>
+          <div className="details-zone-student">
+            <div>
+              {" "}
+              <img src={teacherIcon} alt="graduate" />
+            </div>
+            <div>
+              <h2>{teacher.name}</h2>
+              <p>ID: {teacher.nr}</p>
+              <p>Classes: {teacher.classes.map((c) => c + " | ")}</p>
+            </div>
           </div>
         )}
       </div>

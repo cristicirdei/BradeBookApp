@@ -24,14 +24,28 @@ const items = { ...localStorage };
 console.log("storage ", items);
 
 const Header = () => {
-  const adm = user.type === "admin" ? "admin" : "user";
+  const adm =
+    user.type === "admin"
+      ? "admin"
+      : user.type === "teacher"
+      ? "user"
+      : "admin";
   return (
     <div className={`header ${adm}`}>
-      {user.auth === true && (
+      {user.auth === true ? (
         <div className="navlinks" onClick={() => handleLogOut()}>
           {" "}
           <Link to="/auth">Sign Out</Link>
         </div>
+      ) : (
+        <>
+          <div className="navlinks" onClick={() => window.location.reload()}>
+            <Link to="/auth">Log In</Link>
+          </div>
+          <div className="navlinks" onClick={() => window.location.reload()}>
+            <Link to="/auth/join">Sign Up</Link>
+          </div>
+        </>
       )}
     </div>
   );

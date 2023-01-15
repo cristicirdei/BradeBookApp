@@ -9,6 +9,8 @@ import { useParams } from "react-router-dom";
 import { BACKEND_URL } from "../utils/constants";
 import useFetch from "react-fetch-hook";
 
+import studentIcon from "../resources/user-graduate-solid.svg";
+
 const StudentReport = () => {
   let { id } = useParams();
 
@@ -35,11 +37,16 @@ const StudentReport = () => {
       ) : (
         <div className="class-details">
           <div className="container">
-            <div className="details-zone">
-              <h2>{student.name}</h2>
-              <p>ID: {student.nr}</p>
-              <p>Age: {student.age}</p>
-              <p>Classes: {student.classes.map((c) => c + " | ")}</p>
+            <div className="details-zone-student">
+              <div>
+                <img src={studentIcon} alt="graduate" />
+              </div>
+              <div>
+                <h2>{student.name}</h2>
+                <p>ID: {student.nr}</p>
+                <p>Age: {student.age}</p>
+                <p>Classes: {student.classes.map((c) => c + " | ")}</p>
+              </div>
             </div>
             <h2>Grades</h2>
             {student.grades.map((g) => (

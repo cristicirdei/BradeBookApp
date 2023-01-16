@@ -9,7 +9,8 @@ const Menu = () => {
   return (
     <div className="col-2 menu">
       <h1 className="dash-title">
-        {user.type === "admin" ? "Admin" : "Teacher"} Dashboard
+        {user.type === "admin" && "Admin Dashboard"}
+        {user.type === "teacher" && "Teacher Dashboard"}
       </h1>
       {user.type === "admin" && (
         <>

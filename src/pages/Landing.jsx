@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import student from "../resources/user-graduate-solid.svg";
 import teacher from "../resources/teacher-user-solid.svg";
 import classIcon from "../resources/chalkboard-solid.svg";
@@ -120,6 +121,16 @@ const Landing = () => {
               </ul>
             </div>
           </div>
+          <div className="actions">
+            <div className="navlinks2" onClick={() => window.location.reload()}>
+              <Link to="/auth/join">Sign Up</Link>
+            </div>
+            <h3>OR</h3>
+            <div className="navlinks1" onClick={() => window.location.reload()}>
+              <Link to="/auth">Log In</Link>
+            </div>
+          </div>
+
           <div className="sub"></div>
         </div>
       </div>

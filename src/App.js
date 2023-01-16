@@ -23,12 +23,6 @@ const user = JSON.parse(localStorage.getItem("user")) || {
 };
 
 function App() {
-  /*const { token, setToken } = useToken();
-
-  if (!token) {
-    return <Login setToken={setToken} />;
-  }*/
-
   return (
     <>
       <BrowserRouter>

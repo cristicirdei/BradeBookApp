@@ -11,6 +11,8 @@ import useFetch from "react-fetch-hook";
 const user = JSON.parse(localStorage.getItem("user"));
 console.log("from classes ", user);
 
+console.log(localStorage.getItem("token"));
+
 const Classes = () => {
   const { isLoading, data } = useFetch(
     user.type === "teacher"
@@ -28,8 +30,6 @@ const Classes = () => {
     }
   );
 
-  console.log("classes data here --");
-  console.log(data);
   let classesList = data;
 
   return (

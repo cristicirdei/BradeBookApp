@@ -204,9 +204,63 @@ $shadowColor3: rgba(193, 193, 193, 0.6);
         }
     }
 
+    .actions {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 2rem;
+        border-top: 1px solid rgba(128, 128, 128, 0.168);
+        padding: 3rem;
+
+        .navlinks1 {
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #173F5F;
+            color: #fff;
+            width: 8rem;
+            height: 3rem;
+        }
+
+        .navlinks2 {
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #3CAEA3;
+            color: #fff;
+            width: 8rem;
+            height: 3rem;
+        }
+
+        .navlinks1 a,
+        .navlinks2 a {
+            border-radius: 10px;
+            text-decoration: none;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            width: 8rem;
+            height: 3rem;
+        }
+
+        .navlinks1 a:hover,
+        .navlinks2 a:hover {
+            border-radius: 10px;
+            color: #fff;
+            cursor: pointer;
+            background-color: #000;
+            transition: 0.3s all;
+        }
+    }
+
     .sub {
         height: 15rem;
-        background-color: rgb(253, 253, 249);
+        background-color: #173F5F;
+
     }
 
 
